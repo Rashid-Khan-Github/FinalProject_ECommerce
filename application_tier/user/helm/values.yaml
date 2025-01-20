@@ -1,0 +1,4 @@
+deployment:
+  imageVersion: IMAGE_VERSION
+hpa:
+  cputilization: 75
