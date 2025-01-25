@@ -5,13 +5,13 @@ metadata:
   labels:
     app: rabbitmq
     tier: db
-    project: roboshop
+    project: ecommerce
 spec:
   selector:
     matchLabels:
       app: rabbitmq
       tier: db
-      project: roboshop     # has to match .spec.template.metadata.labels
+      project: ecommerce     # has to match .spec.template.metadata.labels
 
   serviceName: "rabbitmq-service"
   replicas: 1               # by default is 1
@@ -20,7 +20,7 @@ spec:
       labels:
         app: rabbitmq
         tier: db
-        project: roboshop   # has to match .spec.selector.matchLabels
+        project: ecommerce   # has to match .spec.selector.matchLabels
     spec:
       containers:
       - name: rabbitmq
@@ -48,7 +48,7 @@ spec:
   selector:
     app: rabbitmq
     tier: db
-    project: roboshop
+    project: ecommerce
   ports:
   - name: rabbitmq-service-port
     protocol: TCP

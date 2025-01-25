@@ -2,17 +2,17 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: mysql-set
-  namespace: roboshop
+  namespace: ecommerce
   labels:
     app: mysql
     tier: db
-    project: roboshop
+    project: ecommerce
 spec:
   selector:
     matchLabels:
       app: mysql
       tier: db
-      project: roboshop     # has to match .spec.template.metadata.labels
+      project: ecommerce     # has to match .spec.template.metadata.labels
 
   serviceName: "mysql-service"
   replicas: 1               # by default is 1
@@ -21,7 +21,7 @@ spec:
       labels:
         app: mysql
         tier: db
-        project: roboshop   # has to match .spec.selector.matchLabels
+        project: ecommerce   # has to match .spec.selector.matchLabels
     spec:
       containers:
       - name: mysql

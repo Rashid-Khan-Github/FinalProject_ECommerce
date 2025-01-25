@@ -3,13 +3,13 @@ apiVersion: v1
 kind: Service
 metadata:
   name: rabbitmq-service
-  namespace: roboshop
+  namespace: ecommerce
 spec:
   clusterIP: None       # headless service
   selector:
     app: rabbitmq
     tier: db
-    project: roboshop
+    project: ecommerce
   ports:
   - name: rabbitmq-service-port
     protocol: TCP
