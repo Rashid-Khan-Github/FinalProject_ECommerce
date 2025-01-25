@@ -5,9 +5,10 @@ metadata:
   name: mongodb-ebs-dynamic-pvc
   namespace: ecommerce
 spec:
+  storageClassName: ecommerce-ebs-sc
   accessModes:
   - ReadWriteOnce
   resources:
     requests:
       storage: 4Gi
-  storageClassName: "ecommerce-ebs-sc"
+  
