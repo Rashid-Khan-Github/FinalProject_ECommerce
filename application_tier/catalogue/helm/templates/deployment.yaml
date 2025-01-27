@@ -4,23 +4,23 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: catalogue
-  namespace: roboshop
+  namespace: ecommerce
   labels: # these labels are deployment labels
     app: catalogue
-    project: roboshop
+    project: ecommerce
     tier: app
 spec:
   replicas: 1
   selector:
     matchLabels: # these labels are used to find the pods
       app: catalogue
-      project: roboshop
+      project: ecommerce
       tier: app
   template:
     metadata:
       labels: # these labels are pod labels
         app: catalogue
-        project: roboshop
+        project: ecommerce
         tier: app
     spec:
       containers:

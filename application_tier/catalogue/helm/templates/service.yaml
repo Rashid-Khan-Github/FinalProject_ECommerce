@@ -3,11 +3,11 @@ apiVersion: v1
 kind: Service
 metadata:
   name: catalogue-service
-  namespace: roboshop
+  namespace: ecommerce
 spec:
   selector:
     app: catalogue
-    project: roboshop
+    project: ecommerce
     tier: app
   ports:
   - name: catalogue-port
