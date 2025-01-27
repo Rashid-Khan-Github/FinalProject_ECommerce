@@ -11,6 +11,7 @@ managedNodeGroups:                # Completely Managed by AWS
   - name: ecommerce-spot-node
     instanceType: t2.micro
     desiredCapacity: 3
+    volumeSize: 8
     spot: true                    # Your nodes can be takes back at any point of time
     ssh:
       publicKeyName: Virginia-KeyPair  # Your Key pair in AWS
