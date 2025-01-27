@@ -2,7 +2,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: catalogue
+  name: catalogue-config
   namespace: ecommerce
 data:
   MONGO: "true"
