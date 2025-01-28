@@ -10,6 +10,6 @@ managedNodeGroups:                                      # Completely Managed by 
   - name: ecommerce
     instanceType: t2.micro
     desiredCapacity: 3                                  # Your nodes can be takes back at any point of time
-    volumeSize: 10
+    volumeSize: 20
     ssh:
       publicKeyName: Virginia-KeyPair                   # Your Key pair in AWS
