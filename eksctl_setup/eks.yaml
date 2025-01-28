@@ -9,8 +9,7 @@ metadata:
 managedNodeGroups:                                      # Completely Managed by AWS
   - name: managed-ng-public
     instanceType: t2.micro
-    desiredCapacity: 3
-    availabilityZones: ["us-east-1a", "us-east-1b"]     # Your nodes can be takes back at any point of time
+    desiredCapacity: 3                                  # Your nodes can be takes back at any point of time
     volumeSize: 10
     ssh:
       publicKeyName: Virginia-KeyPair                   # Your Key pair in AWS
