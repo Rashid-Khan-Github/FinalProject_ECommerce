@@ -32,4 +32,4 @@ spec:
       volumes:
       - name: mongodb-pv
         persistentVolumeClaim:
-          claimName: mongodb-ebs-dynamic-pvc
+          claimName: mongodb-pvc
