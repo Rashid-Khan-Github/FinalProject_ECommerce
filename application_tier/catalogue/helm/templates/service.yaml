@@ -7,8 +7,8 @@ metadata:
 spec:
   selector:
     app: catalogue
+    tier: db
     project: ecommerce
-    tier: app
   ports:
   - name: catalogue-port
     protocol: TCP

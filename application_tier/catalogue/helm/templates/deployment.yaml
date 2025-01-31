@@ -7,21 +7,21 @@ metadata:
   namespace: ecommerce
   labels: # these labels are deployment labels
     app: catalogue
+    tier: db
     project: ecommerce
-    tier: app
 spec:
   replicas: 1
   selector:
     matchLabels: # these labels are used to find the pods
       app: catalogue
+      tier: db
       project: ecommerce
-      tier: app
   template:
     metadata:
       labels: # these labels are pod labels
         app: catalogue
+        tier: db
         project: ecommerce
-        tier: app
     spec:
       containers:
       - name: catalogue
