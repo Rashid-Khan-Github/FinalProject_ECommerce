@@ -5,7 +5,7 @@ metadata:
   name: mongodb-pvc
   namespace: ecommerce
 spec:
-  storageClassName: ecommerce-ebs-sc
+  storageClassName: "ecommerce-ebs-sc"
   accessModes:
   - ReadWriteOnce
   resources:

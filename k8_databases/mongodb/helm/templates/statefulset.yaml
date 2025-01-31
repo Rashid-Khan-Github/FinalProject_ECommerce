@@ -14,7 +14,7 @@ spec:
       tier: db
       project: ecommerce     # has to match .spec.template.metadata.labels
 
-  serviceName: mongodb-service
+  serviceName: "mongodb-service"
   replicas: 1               # by default is 1
   template:
     metadata:
@@ -32,4 +32,4 @@ spec:
       volumes:
       - name: mongodb-pv
         persistentVolumeClaim:
-          claimName: mongodb-pvc
+          claimName: "mongodb-pvc"
