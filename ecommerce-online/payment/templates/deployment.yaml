@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: payment
+  namespace: ecommerce
+  labels: 
+    app: payment
+    project: ecommerce
+    tier: app
+spec:
+  replicas: {{ .Values.deployment.replicas }}
+  selector:
+    matchLabels:
+      app: payment
+      project: ecommerce
+      tier: app
+  template:
+    metadata:
+      labels:
+        app: payment
+        project: ecommerce
+        tier: app
+    spec:
+      containers:
+      - name: payment
+        image: "dockerjackal/payment:{{ .Values.deployment.imageVersion }}"
+        imagePullPolicy: Always
+        envFrom:
+        - secretRef:
+            name: payment-secret
+        resources:
+          requests:
+            cpu: "50m"
+            memory: "128Mi"
+          limits:
+            cpu: "100m"
+            memory: "256Mi"
+        imagePullPolicy: Always

@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web
+  namespace: ecommerce
+  labels: 
+    app: web
+    project: ecommerce
+    tier: app
+spec:
+  replicas: {{ .Values.deployment.replicas }}
+  selector:
+    matchLabels:
+      app: web
+      project: ecommerce
+      tier: app
+  template:
+    metadata:
+      labels:
+        app: web
+        project: ecommerce
+        tier: app
+    spec:
+      containers:
+      - name: web
+        image: "dockerjackal/web:{{ .Values.deployment.imageVersion }}"
+        imagePullPolicy: Always
+        resources:
+          requests:
+            cpu: "50m"
+            memory: "64Mi"
+          limits:
+            cpu: "100m"
+            memory: "128Mi"
+        volumeMounts:
+        - name: nginx-conf
+          mountPath: /etc/nginx/nginx.conf
+          subPath: nginx.conf
+          readOnly: true
+      volumes:
+      - name: nginx-conf
+        configMap:
+          name: web-config
+          items:
+            - key: nginx.conf
+              path: nginx.conf
