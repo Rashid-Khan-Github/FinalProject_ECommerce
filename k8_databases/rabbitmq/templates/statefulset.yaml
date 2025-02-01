@@ -14,7 +14,7 @@ spec:
       project: ecommerce
       tier: db 
   serviceName: "rabbitmq"
-  replicas: "{{ .Values.statefulset.replicas }}"
+  replicas: {{ .Values.statefulset.replicas }}
   template:
     metadata:
       labels:
