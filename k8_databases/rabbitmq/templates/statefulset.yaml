@@ -1,34 +1,42 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: rabbitmq-set
+  name: rabbitmq
+  namespace: ecommerce
   labels:
     app: rabbitmq
-    tier: db
     project: ecommerce
+    tier: db
 spec:
   selector:
     matchLabels:
       app: rabbitmq
-      tier: db
-      project: ecommerce     # has to match .spec.template.metadata.labels
-
-  serviceName: "rabbitmq-service"
-  replicas: 1               # by default is 1
+      project: ecommerce
+      tier: db 
+  serviceName: "rabbitmq"
+  replicas: "{{ .Values.statefulset.replicas }}"
   template:
     metadata:
       labels:
         app: rabbitmq
-        tier: db
-        project: ecommerce   # has to match .spec.selector.matchLabels
+        project: ecommerce
+        tier: db 
     spec:
       containers:
       - name: rabbitmq
         image: rabbitmq
+        envFrom:
+        - secretRef:
+            name: rabbitmq-secret
         volumeMounts:
-        - name: rabbitmq-pv
+        - name: rabbitmq
           mountPath: /var/lib/rabbitmq
-      volumes:
-      - name: rabbitmq-pv
-        persistentVolumeClaim:
-          claimName: rabbitmq-ebs-dynamic-pvc
+  volumeClaimTemplates:
+  - metadata:
+      name: rabbitmq
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      storageClassName: "ecommerce-sc"
+      resources:
+        requests:
+          storage: 1Gi
