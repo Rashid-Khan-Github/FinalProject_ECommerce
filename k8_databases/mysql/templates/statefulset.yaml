@@ -1,27 +1,26 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: mysql-set
+  name: mysql
   namespace: ecommerce
   labels:
     app: mysql
-    tier: db
     project: ecommerce
+    tier: db
 spec:
   selector:
     matchLabels:
       app: mysql
+      project: ecommerce
       tier: db
-      project: ecommerce     # has to match .spec.template.metadata.labels
-
-  serviceName: "mysql-service"
-  replicas: 1               # by default is 1
+  serviceName: "mysql"
+  replicas: {{ .Values.statefulset.replicas }}
   template:
     metadata:
       labels:
         app: mysql
+        project: ecommerce
         tier: db
-        project: ecommerce   # has to match .spec.selector.matchLabels
     spec:
       containers:
       - name: mysql
@@ -30,9 +29,14 @@ spec:
         - configMapRef:
             name: mysql-configmap
         volumeMounts:
-        - name: mysql-pv
+        - name: mysql
           mountPath: /var/lib/mysql
-      volumes:
-      - name: mysql-pv
-        persistentVolumeClaim:
-          claimName: mysql-ebs-dynamic-pvc
+    volumeClaimTemplates:
+    - metadata:
+        name: mysql
+      spec:
+        accessModes: [ "ReadWriteOnce" ]
+        storageClassName: "ecommerce-sc"
+        resources:
+          requests:
+            storage: 1Gi
