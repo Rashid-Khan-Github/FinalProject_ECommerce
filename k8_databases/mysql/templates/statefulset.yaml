@@ -31,12 +31,12 @@ spec:
         volumeMounts:
         - name: mysql
           mountPath: /var/lib/mysql
-    volumeClaimTemplates:
-    - metadata:
-        name: mysql
-      spec:
-        accessModes: [ "ReadWriteOnce" ]
-        storageClassName: "ecommerce-sc"
-        resources:
-          requests:
-            storage: 1Gi
+  volumeClaimTemplates:
+  - metadata:
+      name: mysql
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      storageClassName: "ecommerce-sc"
+      resources:
+        requests:
+          storage: 1Gi
