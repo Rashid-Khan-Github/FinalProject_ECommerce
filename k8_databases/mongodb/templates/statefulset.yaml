@@ -1,35 +1,39 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: mongodb-set
+  name: mongodb
   namespace: ecommerce
   labels:
     app: mongodb
-    tier: db
     project: ecommerce
+    tier: db
 spec:
   selector:
     matchLabels:
       app: mongodb
+      project: ecommerce
       tier: db
-      project: ecommerce     # has to match .spec.template.metadata.labels
-
-  serviceName: "mongodb-service"
-  replicas: 2               # by default is 1
+  serviceName: "mongodb"
+  replicas: {{ .Values.statefulset.replicas }}
   template:
     metadata:
       labels:
         app: mongodb
+        project: ecommerce
         tier: db
-        project: ecommerce   # has to match .spec.selector.matchLabels
     spec:
       containers:
       - name: mongodb
         image: "dockerjackal/mongodb:{{ .Values.statefulset.imageVersion }}"
         volumeMounts:
-        - name: mongodb-pv
+        - name: mongodb
           mountPath: /data/db
-      volumes:
-      - name: mongodb-pv
-        persistentVolumeClaim:
-          claimName: "mongodb-pvc"
+  volumeClaimTemplates:
+  - metadata:
+      name: mongodb
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      storageClassName: "ecommerce-sc"
+      resources:
+        requests:
+          storage: 1Gi
