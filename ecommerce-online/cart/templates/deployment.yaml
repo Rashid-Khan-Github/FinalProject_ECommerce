@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cart
+  namespace: ecommerce
+  labels: 
+    app: cart
+    project: ecommerce
+    tier: app
+spec:
+  replicas: {{ .Values.deployment.replicas }}
+  selector:
+    matchLabels:
+      app: cart
+      project: ecommerce
+      tier: app
+  template:
+    metadata:
+      labels:
+        app: cart
+        project: ecommerce
+        tier: app
+    spec:
+      containers:
+      - name: cart
+        image: "dockerjackal/cart:{{ .Values.deployment.imageVersion }}"
+        imagePullPolicy: Always
+        envFrom:
+        - configMapRef:
+            name: cart-config
+        resources:
+          requests:
+            cpu: "50m"
+            memory: "128Mi"
+          limits:
+            cpu: "100m"
+            memory: "256Mi"
+        imagePullPolicy: Always
