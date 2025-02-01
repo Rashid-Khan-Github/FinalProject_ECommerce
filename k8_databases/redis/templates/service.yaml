@@ -2,16 +2,19 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: redis-service
+  name: redis
   namespace: ecommerce
+  labels:
+    app: redis
+    project: ecommerce
+    tier: db
 spec:
   clusterIP: None       # headless service
   selector:
     app: redis
+    project: ecommerce
     tier: db
-    project: ecommerce 
   ports:
-  - name: redis-service-port
-    protocol: TCP
-    port: 6379            # this port no belongs to service
-    targetPort: 6379      # this port belongs to container
+  - protocol: TCP
+    port: 6379           # this port no belongs to service
+    targetPort: 6379     # this port belongs to container
