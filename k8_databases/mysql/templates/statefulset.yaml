@@ -28,6 +28,8 @@ spec:
         envFrom:
         - configMapRef:
             name: mysql-configmap
+        - secretRef:
+            name: mysql-secret
         volumeMounts:
         - name: mysql
           mountPath: /var/lib/mysql
